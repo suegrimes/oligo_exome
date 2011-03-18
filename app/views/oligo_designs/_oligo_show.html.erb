@@ -1,0 +1,68 @@
+<p>
+  <b>Oligo Name:</b>
+  <%=h oligo_design.oligo_name %>
+</p>
+
+<table class="border">
+  <tr>
+	<th>ID</th>
+	<th>Chromosome</th>    
+	<th>Capture Length</th>       
+	<th>Capture Start</th>      
+	<th>Capture End</th>      
+  </tr>
+  
+  <tr>
+	<td>
+	<% if controller.controller_name == 'synth_oligos' %>
+	    <%=oligo_design.oligo_id %>
+	<% else %>
+	    <%=oligo_design.id %>
+	<% end %>
+	</td>
+	<td><%=oligo_design.chromosome_nr %></td>
+	<td><%=oligo_design.amplicon_length %></td>
+	<td><%=oligo_design.amplicon_chr_start_pos %></td>
+	<td><%=oligo_design.amplicon_chr_end_pos %></td>
+  </tr>
+</table>
+
+<table class="border">  
+  <tr>
+	<th>Capture Oligo</th>
+	<th>Polarity</th>
+  </tr>
+  <tr>
+    <td><%=h oligo_design.selector_useq %></td>
+	<td align=center><%=h oligo_design.polarity %></td>
+  </tr>
+</table>
+
+<table class="border">
+  <tr>
+	<th colspan=2>Annotations</th>
+	<th colspan=3>Repeat counts</th>
+  </tr>
+  <tr>
+	<th>Flagged</th>
+	<th>Other</th>
+	<th>Paralogs</th>
+	<th>WG U0</th>
+	<th>WG U1</th>
+  </tr>
+  <tr>
+	<td><%=h oligo_design.annotation_codes %></td>
+	<td><%=h oligo_design.other_annotations %></td>
+	
+    <%= render :partial => 'oligo_designs/annotations', :locals => {:oligo_annotation => oligo_design.oligo_annotation} %>
+  </tr>
+</table>
+
+<table class="border">
+<tr><th>Genomic Capture Sequence</th></tr>
+<tr><td class=hardbreak><%= oligo_design.amplicon_seq %></td></tr>
+</table>
+
+<%= render(:partial => "shared/show_comments", :locals => {:comments => @comments}) %>
+<%= render(:partial => "shared/add_comment", :locals => {:id => oligo_design.id}) %>
+		
