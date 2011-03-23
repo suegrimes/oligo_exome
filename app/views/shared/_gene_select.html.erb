@@ -1,6 +1,21 @@
-	<th>Genes:</th>
-	<td><%= text_area_tag(:genes, @genes, :cols => 15, :rows => 10) %> </td>
-	<td class='notes'>Enter Hugo gene codes separated by space, <br>
-                  or copy/paste from an Excel row or column. <br> 
-                  Note: maximum of 400 genes may be selected </td>
+<td>
+<fieldset>
+<legend><em>GENES</em></legend>
+<ol>
+<li>
+<label style="width: 45%;"><span style="color:#333; font-size:0.9em;">Enter Hugo gene codes separated by space,
+or copy/paste from an Excel row or column.
+Note: maximum of 400 genes may be selected<br />
+<br />
+<em>Example query</em><br />
+<br />
+brca1 brca2 tp53</span>
+</label>
+<textarea cols="25" id="genes" name="genes" rows="10"></textarea>
+</li>
+</ol>
+</fieldset>
+</td>
+
+
 
