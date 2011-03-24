@@ -21,9 +21,9 @@ config.action_mailer.smtp_settings = {
              :port    => 587,
              :domain  => 'stanford.oligoexome@gmail.com',
              :tls     => true,
-             :authentication => :login,
-             :user_name => 'stanford.oligoexome',
-             :password  => 'sgtc_exome'
+             #:authentication => :login,
+             #:user_name => 'stanford.oligoexome',
+             #:password  => '<pswd>'
              }
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
