@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-        <title>SGTC LIMS<%= controller.action_name %></title>
+        <title>Stanford OligoExome<%= controller.action_name %></title>
         <meta name="description" content="Stanford Human OligoExome Project" />
         <meta name="keywords" content="stanford university, biological medicine, hanlee ji, george natsoulis, oligo exome, oligo, oligonucleotide, CCDS, genome, cancer, cancer research, dna sequencing">
         <%= stylesheet_link_tag 'lims_std' %>
@@ -38,7 +38,7 @@
       <td valign="bottom">
         <% if logged_in? %>
         <div class="logout-link">
-          <%= link_to 'User Profile', edit_user_path(current_user) %>&nbsp;&nbsp;&nbsp;&nbsp;
+          <!-- <%= link_to 'User Profile', edit_user_path(current_user) %>&nbsp;&nbsp;&nbsp;&nbsp; -->
           <%= link_to 'Logout', logout_url %>
         </div>
         <% end %>
@@ -71,7 +71,8 @@
     <li><%= link_to 'Download Zip File',   zip_download_url %></li> 
     <li><a href="#">FAQ</a>          
       <ul>
-        <li><%= link_to 'OligoExome Stats',    faq_statistics_url %></li> 
+        <li><%= link_to 'Technology Approach', faq_technology_url %></li> 
+		<li><%= link_to 'OligoExome Stats',    faq_statistics_url %></li> 
         <li><%= link_to 'Annotation Codes',    faq_annotations_url %></li>
       </ul>
     </li>     
@@ -79,16 +80,16 @@
 	<span style="font-size:.9em; font-style: normal; color:#000;">Supporting information for  the 
 manuscript <em>A Flexible Approach for Highly Multiplexed Candidate Gene Targeted Resequencing</em></span>
 	</div>
-	<li><a href="/files/supporting_info_PLoSONE_20110224.doc">PLoSONE (word doc)</a></li>
-    <li><%= link_to 'Figures S1', faq_technology_url %></li>
-    <li><a href="/files/Table_S5_Novels_SNVs.txt">Table_S5_Novels_SNVs</a><!--%= link_to 'Table_S5_Novels_SNVs'  %--></li>
-    <li><a href="/files/Table_S8_Capture_Oligos.txt">Table_S8_Capture_Oligos</a><!--%= link_to 'Table_S8_Capture_Oligos'  %!--></li>
+	<!--<li><a href="/files/supporting_info_PLoSONE_20110224.doc">PLoSONE (word doc)</a></li>-->
+    <li><%= link_to 'Figure S1', figure_s1_url %></li>
+	<li><%= link_to 'Table S5: Novel SNVs', table_s5_url %></li>
+	<li><%= link_to 'Table S8: Capture Oligos', table_s8_url %></li>
 	<div class="sidebar-label">DATA DERIVED FROM:</div>
     <li><a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/H_sapiens/ARCHIVE/BUILD.36.3/">Human genome build: 36.3</a></li>
-    <li><a href="ftp://ftp.ncbi.nlm.nih.gov/pub/CCDS/archive/Hs36.3/">CCDS build release: 20080902</a></li>
+    <li><a href="ftp://ftp.ncbi.nlm.nih.gov/pub/CCDS/archive/Hs36.3/">CCDS build: 20080902</a></li>
     <li><a href="ftp://ftp.ncbi.nih.gov/snp/organisms/human_9606/database/b129_archive/">dbSNP build id: 129</a></li>
     <% if Version::DESIGN_VERSION %> 
-    <li><a href="#" style="color: #888;">OligoExome version: <%= Version::DESIGN_VERSION.design_version %></a></li>
+    <li><a href="#" style="color: #888;">OligoExome v<%= Version::DESIGN_VERSION.design_version %></a></li>
     <% end %>
     
     <div class="sidebar-label">OTHER LINKS:</div>
@@ -128,7 +129,7 @@ manuscript <em>A Flexible Approach for Highly Multiplexed Candidate Gene Targete
   </table>
   <div class="lft" style="width:30%">
     <a href="http://med.stanford.edu/sgtc/">Stanford Genome Tech Center</a>&nbsp;|
-    <a href="mailto:insert_contact_name@stanford.edu">Contact</a>
+    <a href="mailto:sgrimes@stanford.edu">Contact</a>
     <div class="site-blurb">Website provided by the Ji Research Group and<br />
     Genome Technology Center at Stanford University</div>
   </div>
