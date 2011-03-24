@@ -16,6 +16,9 @@ ActionController::Routing::Routes.draw do |map|
   map.faq_technology  '/faq_technology',  :controller => 'help', :action => 'technology'
   map.faq_annotations '/faq_annotations', :controller => 'help', :action => 'annotations'
   map.faq_statistics  '/faq_statistics',  :controller => 'help', :action => 'statistics'
+  map.figure_s1       '/figure_s1',  :controller => 'help', :action => 'figure_s1'
+  map.table_s5        '/table_s5',  :controller => 'help', :action => 'table_s5'
+  map.table_s8        '/table_s8',  :controller => 'help', :action => 'table_s8'
   
   # Oligo Designs
   map.resources :oligo_designs
