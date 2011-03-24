@@ -9,10 +9,7 @@
 <p><label for="remember_me">Remember me:</label>
 <%= check_box_tag 'remember_me' %></p>
 -->
-<%= submit_tag 'Log in' -%><%= link_to '  Forgot password?', forgot_path %></p>
+<%= submit_tag 'Log in' -%><%= link_to '  Forgot password?', forgot_path -%></p>
 <% end %>
 
-<span>If you don't have a login id, please <%=button_to 'Sign up', :controller => :users, :action => :new %></span> 
-<br />
-<br />
-<hr>
+<span>If you don't have a login id, please</span><%=button_to 'Sign up', :controller => :users, :action => :new -%> 
