@@ -1,0 +1,2 @@
+META_TAGS = {:description => "Stanford Human OligoExome is a scalable oligonucleotide management system for genomic analysis and high-throughput resequencing. This set of capture oligonucleotides will cover the CCDS exon space and a high proportion of related regulatory regions from the human genome.",
+             :keywords => ["stanford university, biological medicine, hanlee ji, george natsoulis, oligo exome, oligo, oligonucleotide, CCDS, genome, cancer, cancer research, resequencing, dna sequencing"]}

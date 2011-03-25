@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <title>Stanford OligoExome - <%= controller.action_name.titleize %></title>
-        <meta name="description" content="Stanford Human OligoExome Project" />
-        <meta name="keywords" content="stanford university, biological medicine, hanlee ji, george natsoulis, oligo exome, oligo, oligonucleotide, CCDS, genome, cancer, cancer research, dna sequencing">
+        <meta name="description" content="<%= META_TAGS[:description] %>" />
+        <meta name="keywords" content="<%= META_TAGS[:keywords] %>" />
         <%= stylesheet_link_tag 'lims_std' %>
         <%= stylesheet_link_tag 'superfish' %>
         <%= javascript_include_tag :all, :cache => true %>
