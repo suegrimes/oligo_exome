@@ -150,26 +150,35 @@ manuscript <em>A Flexible Approach for Highly Multiplexed Candidate Gene Targete
     
 </div><!-- /main -->
 
-<div id="footer" style="height:110px;">
-  <table border="0" align="right" cellpadding="0" cellspacing="0" width="375">
-    <tr>
-      <td colspan="3" style="color:#990000;">Funding Provided by</td>
-    </tr> 
-	<tr><td colspan="3"></tr>   
-    <tr>
-      <td style="border: 1px solid #999; border-right:none;padding: 4px;"><div class="funding-text"><a href="http://www.genome.gov/">National Human Genome Research Institute</a></div></td>
-      <td style="border: 1px solid #999; border-right:none;padding: 4px;"><div class="funding-text"><a href="http://www.nih.gov/">National Instututes of Health</a></div></td>
-      <td style="border: 1px solid #999;padding: 4px;"><div class="funding-text"><a href="http://www.ddcf.org/Medical-Research/">Doris Duke Charitable Foundation</a></div></td>
-    </tr>
-  </table>
-  <div class="lft" style="width:30%">
-    <a href="http://med.stanford.edu/sgtc/">Stanford Genome Tech Center</a>&nbsp;|
-    <a href="mailto:sgrimes@stanford.edu">Contact</a>
-    <div class="site-blurb">Website provided by the Ji Research Group and<br />
-    Genome Technology Center at Stanford University<br />
-	<br />
-	This website and its content &copy; Stanford University, <%= Time.now.localtime.strftime("%Y") %>.<br />All rights reserved.</div>
-  </div>
+<div id="footer">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 0;">
+  <tr>
+    <td valign="top">
+      <a href="http://med.stanford.edu/sgtc/">Stanford Genome Tech Center</a>&nbsp;|
+      <a href="mailto:sgrimes@stanford.edu">Contact</a>
+      <div class="site-blurb">Website provided by the Ji Research Group<br />School of Medicine and Genome Technology Center at Stanford University<br />
+      This website and its content &copy; Stanford University, <%= Time.now.localtime.strftime("%Y") %>. All rights reserved.
+      </div>
+    </td>
+	<td valign="top">
+      <table border="0" cellpadding="0" cellspacing="0" align="right" style="margin-bottom: 0;" width="45%">
+        <tr>
+          <td colspan="3" style="color:#990000;">Funding Provided by</td>
+        </tr>           
+        <tr>
+          <td class="funding-text"><a href="http://www.nih.gov/"><!--<cite>NIH-logo.gif - credit: image from http://www.nih.gov/ </cite>--><%= image_tag("NIH-logo.gif", :height => "70", :border => 0, :alt => "National Institutes of Health") %></a></td>     
+          <td class="funding-text"><a href="http://www.genome.gov/"><!--<cite>NHGRI-logo.gif - credit: image from http://www.genome.gov/ </cite>--><%= image_tag("NHGRI-logo.gif", :height => "70", :border => 0, :alt => "National Human Genome Research Institute") %></a></td>
+          <td class="funding-text"><a href="http://www.ddcf.org/Medical-Research/Program-Strategies/Clinical-Research/"><!--<cite>DorisDuke-logo.gif - credit: image from http://www.ddcf.org </cite>--><%= image_tag("DorisDuke-logo.gif", :height => "70", :border => 0, :alt => "Doris Duke Charitable Foundation") %></a></td>
+        </tr> 
+        <tr>
+          <td valign="top" class="funding-text"><a href="http://www.nih.gov/">National Institutes of Health</a></td>
+          <td valign="top" class="funding-text"><a href="http://www.genome.gov/">National Human Genome Research Institute</a></td>
+          <td valign="top" class="funding-text"><a href="http://www.ddcf.org/Medical-Research/Program-Strategies/Clinical-Research/">Doris Duke Charitable Foundation</a></td>
+        </tr> 
+      </table>
+    </td>
+  </tr>
+</table>
 </div>
 
 </div><!-- /container -->
