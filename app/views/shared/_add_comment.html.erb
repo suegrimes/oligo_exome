@@ -1,14 +1,22 @@
-<p id='comment_see'>
-    <%= link_to_remote "Add a comment?",
-            :url => { :action => 'commenting', :controller => 'comments' }%></p>
+<div id="comment_see"><%= link_to_function "Add a comment?", div_toggle(:comment_see, :commenting) %></div>
 
-<div id='commenting' style='display:none'>
-  <% form_tag :action => :add_comment, :id => id do%>
-    <hr>
-    <b>Add a Comment:</b><br>
-	Title: <%= text_field_tag 'title', nil, :size => 50 %><br>
-    Text:<%= text_area_tag 'comment', nil, :cols=>60, :rows=>3 %>
-    <hr>
-	<%= submit_tag "Add comment"%>
-  <% end %>
-</div>
+<% form_tag :action => :add_comment, :id => id do%>
+
+<fieldset id="commenting" style="display:none" class="form">
+<legend>Add a Comment</legend>
+
+  <table class="form">
+    <tr>
+	  <th>Title:</th><td><%= text_field_tag 'title', nil, :size => 50 %></td>
+    </tr>
+    <tr>
+      <th>Text:</th><td><%= text_area_tag 'comment', nil, :cols=>60, :rows=>3 %><td>
+    </tr>	
+    <tr>
+      <td colspan="2" align="center"><%= submit_tag "Add comment" %></td>
+    </tr>
+  </table>  
+</fieldset>
+
+<% end %>
+

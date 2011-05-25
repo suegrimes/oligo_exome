@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash[:notice] = "Invalid login - Please try again"
-      render :action => 'new'
+      redirect_to root_path
     end
   end
 
