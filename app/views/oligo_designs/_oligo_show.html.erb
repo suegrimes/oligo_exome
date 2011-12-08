@@ -54,14 +54,11 @@
     <%= render :partial => 'oligo_designs/annotations', :locals => {:oligo_annotation => oligo_design.oligo_annotation} %>
   </tr>
 </table>
-<!--
-<table class="list">
-<tr><th>Genomic Capture Sequence</th></tr>
-<tr><td style="overflow:auto;"><div><%= oligo_design.amplicon_seq %></div></td></tr>
+
+<table class="list" style="margin-bottom:0;border-bottom:none;">
+<tr><th style="border-bottom:none;">Genomic Capture Sequence</th></tr>
 </table>
--->
-<strong>Genomic Capture Sequence</strong>:
-<div style="overflow:auto; margin-bottom: 1em; border: 1px solid #999; padding:2px;"><%= oligo_design.amplicon_seq %></div>
+<div class="wraplongstring longstring_border"><%= oligo_design.amplicon_seq %></div>
 
 <%= render(:partial => "shared/show_comments", :locals => {:comments => @comments}) %>
 <%= break_clear %>
