@@ -7,11 +7,6 @@ module ApplicationHelper
     end
   end
   
-  def version_name(version_id)
-    vname = Version::BUILD_VERSION_NAMES.assoc(version_id.to_i)
-    return (vname ? [vname[0], vname[1]].join('-') : 'invalid')
-  end
-  
   def format_annot(qc=nil, annot=nil)
     if qc.blank? && annot.blank?
       annot_val = ' '

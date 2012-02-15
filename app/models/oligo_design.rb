@@ -30,9 +30,10 @@
 class OligoDesign < ActiveRecord::Base
 # PilotOligoDesign inherits from this model class, therefore any table name references must be generic, 
 # or method must be passed a parameter to indicate which model the method is accessing
-  acts_as_commentable
- 
+  set_table_name = OLIGO_DESIGN_TABLE
+  
   has_one  :oligo_annotation, :foreign_key => :oligo_design_id
+  acts_as_commentable
   
   validates_uniqueness_of :oligo_name,
                           :on  => :create  

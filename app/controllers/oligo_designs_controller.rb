@@ -73,6 +73,7 @@ class OligoDesignsController < ApplicationController
       error_found    = true
       
     when 'g'  #gene list entered
+      gene_list      = create_array_from_text_area(params[:genes])
       @oligo_designs = OligoDesign.find_selectors_with_conditions(['gene_code IN (?)', gene_list])
       error_found    = check_if_blank(@oligo_designs, 'oligos', 'gene(s)')
     end
@@ -174,13 +175,14 @@ class OligoDesignsController < ApplicationController
   #*******************************************************************************************#
   # Download zip file                                                                         #
   #*******************************************************************************************#
-  def download_zip_file(version_id=Version::DESIGN_VERSION.id)
-    filepath = File.join(ZIP_ABS_PATH, "oligo_exome_V#{version_id}.zip")
+  def download_zip_file(version_id=EXOME_VERSION)
+    filepath = File.join(ZIP_ABS_PATH, "oligo_exome_V#{version_id.to_s}.zip")
 
     if FileTest.file?(filepath)
       flash[:notice] = "Zip file successfully downloaded"
       send_file(filepath, :disposition => "attachment")
     else
+      #flash[:notice] = "Error downloading zip file - file #{filepath} not found"
       flash[:notice] = "Error downloading zip file - file not found"
     end
   end
