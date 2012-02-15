@@ -9,8 +9,7 @@ class OligoDesignsController < ApplicationController
 #
     export_type = 'T1'
     design_ids = params[:export_id]
-    @version_id = set_version_id(params[:version_id])
-    @oligo_designs = get_oligos_by_id(design_ids, @version_id)
+    @oligo_designs = get_oligos_by_id(design_ids)
     file_basename  = "oligodesigns_" + Date.today.to_s
 
     case export_type
@@ -69,7 +68,6 @@ class OligoDesignsController < ApplicationController
     param_type = params[:param_type] ||= 'proj_gene'
 
     error_found = false
-    @version_id = set_version_id(nil)
     @rc = check_params2(params)
 
     case @rc
@@ -78,7 +76,7 @@ class OligoDesignsController < ApplicationController
       
     when 'g'  #gene list entered
       gene_list      = create_array_from_text_area(params[:genes])
-      @oligo_designs = get_oligos_by_gene(nil, gene_list, @version_id) 
+      @oligo_designs = get_oligos_by_gene(nil, gene_list) 
       error_found    = check_if_blank(@oligo_designs, 'oligos', 'project/gene(s)')
     end
 
@@ -135,22 +133,11 @@ class OligoDesignsController < ApplicationController
   end
 
   #*******************************************************************************************#
-  # Set version id from params                                                                #
-  #*******************************************************************************************#
-  def set_version_id(version_num)
-    return (version_num.blank? ? Version::DESIGN_VERSION.id : version_num.to_i)
-  end
-
-  #*******************************************************************************************#
   # Find oligos by project/gene, for specific script/version                                  #
   #*******************************************************************************************#
-  def get_oligos_by_gene(project, genes, version_id=Version::DESIGN_VERSION_ID)
+  def get_oligos_by_gene(project, genes)
     condition_array = ['gene_code IN (?)', genes]
-
-    #Determine which table to retrieve oligos from (Pilot, Archive or Current  ..oligo_designs)
-    @model = get_model_name(version_id)
-
-    @oligo_designs = @model.constantize.find_selectors_with_conditions(condition_array, version_id)
+    @oligo_designs = OligoDesign.find_selectors_with_conditions(condition_array)
     return @oligo_designs
   end
 
