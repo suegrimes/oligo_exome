@@ -9,7 +9,7 @@ class OligoDesignsController < ApplicationController
 #
     export_type = 'T1'
     design_ids = params[:export_id]
-    @oligo_designs = get_oligos_by_id(design_ids)
+    @oligo_designs = OligoDesign.find_with_id_list(design_ids)
     file_basename  = "oligodesigns_" + Date.today.to_s
 
     case export_type
@@ -65,8 +65,6 @@ class OligoDesignsController < ApplicationController
   # Method for listing oligo designs, based on parameters entered above                       #
   #*******************************************************************************************#
   def list_selected
-    param_type = params[:param_type] ||= 'proj_gene'
-
     error_found = false
     @rc = check_params2(params)
 
@@ -75,9 +73,8 @@ class OligoDesignsController < ApplicationController
       error_found    = true
       
     when 'g'  #gene list entered
-      gene_list      = create_array_from_text_area(params[:genes])
-      @oligo_designs = get_oligos_by_gene(nil, gene_list) 
-      error_found    = check_if_blank(@oligo_designs, 'oligos', 'project/gene(s)')
+      @oligo_designs = OligoDesign.find_selectors_with_conditions(['gene_code IN (?)', gene_list])
+      error_found    = check_if_blank(@oligo_designs, 'oligos', 'gene(s)')
     end
 
     if error_found
@@ -130,43 +127,6 @@ class OligoDesignsController < ApplicationController
       rc = 'e1'
     end
     return rc
-  end
-
-  #*******************************************************************************************#
-  # Find oligos by project/gene, for specific script/version                                  #
-  #*******************************************************************************************#
-  def get_oligos_by_gene(project, genes)
-    condition_array = ['gene_code IN (?)', genes]
-    @oligo_designs = OligoDesign.find_selectors_with_conditions(condition_array)
-    return @oligo_designs
-  end
-
-  #*******************************************************************************************#
-  # Find oligos by id, for specific script/version                                            #
-  #*******************************************************************************************#
-  def get_oligos_by_id(ids, version_id=Version::DESIGN_VERSION_ID)
-    #Determine which table to retrieve oligos from (Pilot, Archive or Current  ..oligo_designs)
-    @model = get_model_name(version_id)
-
-    @oligo_designs = @model.constantize.find_with_id_list(ids)
-    return @oligo_designs
-  end
-
-  #*******************************************************************************************#
-  # Determine which model to use for specific script/version                                  #
-  #*******************************************************************************************#
-  def get_model_name(version_id)
-    version = Version.find_by_id(version_id)
-    case version.archive_flag
-      # 'P' is pilot project; 'A' is archived project; otherwise in current oligo_designs table
-      when 'P'
-        model = 'PilotOligoDesign'
-      when 'A'
-        model = 'ArchiveOligoDesign'
-      else
-        model = 'OligoDesign'
-    end
-    return model
   end
 
   #*******************************************************************************************#

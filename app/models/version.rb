@@ -10,6 +10,7 @@
 #  dbsnp_build           :string(15)
 #  design_version        :string(15)      default(""), not null
 #  version_name          :string(50)
+#  vector_id             :integer(4)
 #  archive_flag          :string(1)
 #  genome_build_notes    :string(255)
 #  design_version_notes  :string(255)

@@ -29,11 +29,6 @@ ActionController::Routing::Routes.draw do |map|
   # Zip download (entire exome of designs)
   map.zip_download 'zip_download',     :controller => 'oligo_designs', :action => 'zip_download'
   
-  # Genome build & Design results
-  map.resources :genes
-  map.resources :target_regions
-  map.resources :selector_sites
-  
   # Error/not implemented
   map.notimplemented 'notimplemented', :controller => 'dummy',         :action => 'notimplemented'
   
