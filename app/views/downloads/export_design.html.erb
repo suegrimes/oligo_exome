@@ -1,8 +1,6 @@
-<% xfmt = ExportField::EXPORT_FMT %>
-
 <table>
   <tr>
-	<% ExportField.headings(xfmt).each do |hdg| %>
+	<% ExportField.headings(EXPORT_FMT).each do |hdg| %>
 	  <th><%= hdg %></th>
 	<% end %>
 	  <th>Extract Date</th>

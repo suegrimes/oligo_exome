@@ -1,14 +1,13 @@
-class OligoDesignsController < ApplicationController
-
-  # GET /oligo_designs
+class OsseqDesignsController < ApplicationController
+  # GET /osseq_designs
   def index
-    @oligo_designs = OligoDesign.find(:all)
+    @osseq_designs = OsseqDesign.find(:all)
   end
   #
   # GET /oligo_designs/1
   def show
-    @oligo_design = OligoDesign.find(params[:id], :include => :oligo_annotation )
-    @comments     = @oligo_design.comments.sort_by(&:created_at).reverse
+    @osseq_design = OsseqDesign.find(params[:id])
+    @comments     = @osseq_design.comments.sort_by(&:created_at).reverse
   end
 
   #*******************************************************************************************#
@@ -31,8 +30,8 @@ class OligoDesignsController < ApplicationController
       
     when 'g'  #gene list entered
       gene_list      = create_array_from_text_area(params[:genes])
-      @oligo_designs = OligoDesign.find_selectors_with_conditions(['gene_code IN (?)', gene_list])
-      error_found    = check_if_blank(@oligo_designs, 'oligos', 'gene(s)')
+      @osseq_designs = OsseqDesign.find_selectors_with_conditions(['gene_code IN (?)', gene_list])
+      error_found    = check_if_blank(@osseq_designs, 'oligos', 'gene(s)')
     end
 
     if error_found
@@ -47,8 +46,8 @@ class OligoDesignsController < ApplicationController
   #*******************************************************************************************#
   def add_comment
     unless params[:comment].nil? || params[:comment]== ''
-      @oligo_design = OligoDesign.find(params[:id])
-      store_comment(@oligo_design, params)
+      @osseq_design = OsseqDesign.find(params[:id])
+      store_comment(@osseq_design, params)
     end
 
     redirect_to :action => 'show', :id => params[:id]
@@ -76,5 +75,4 @@ private
     end
     return rc
   end
-
 end

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   include OligoExtensions
 
   before_filter :login_required
-  layout "#{EXOME_LAYOUT}"
+  layout "#{APP_LAYOUT}"
   
   require 'fastercsv'
   
@@ -62,5 +62,9 @@ class ApplicationController < ActionController::Base
     return error_found
   end
   
+protected
+  def read_table(file_path)
+    FasterCSV.read(file_path, {:col_sep => "\t"})
+  end
 
 end

@@ -1,6 +1,6 @@
-class V8HelpController < ApplicationController
+class FaqV8Controller < ApplicationController
   skip_before_filter :login_required
-  FILE_PATH = File.join(RAILS_ROOT, "public/files")
+  FILE_PATH = File.join(RAILS_ROOT, "public/files/exome_v12")
   
   def technology
   end
@@ -29,8 +29,4 @@ class V8HelpController < ApplicationController
   def annotations 
   end
 
-protected
-  def read_table(file_path)
-    FasterCSV.read(file_path, {:col_sep => "\t"})
-  end
 end

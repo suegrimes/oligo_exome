@@ -1,51 +1,32 @@
 # == Schema Information
 #
-# Table name: oligo_designs
+# Table name: osseq_designs
 #
 #  id                     :integer(4)      not null, primary key
 #  oligo_name             :string(100)     default(""), not null
 #  chromosome_nr          :string(3)
 #  gene_code              :string(25)
-#  enzyme_code            :string(20)
 #  roi_nr                 :integer(2)
-#  internal_QC            :string(2)
-#  annotation_codes       :string(20)
-#  other_annotations      :string(20)
 #  sel_polarity           :string(1)
-#  sel_5prime             :string(30)
-#  sel_3prime             :string(30)
-#  usel_5prime            :string(30)
-#  usel_3prime            :string(30)
-#  selector_useq          :string(255)
+#  selector               :string(40)
+#  uselector              :string(40)
+#  selector_useq          :string(108)
 #  amplicon_chr_start_pos :integer(4)
 #  amplicon_chr_end_pos   :integer(4)
 #  amplicon_length        :integer(4)
-#  amplicon_seq           :text
 #  version_id             :integer(4)
 #  genome_build           :string(25)
 #  created_at             :datetime
 #  updated_at             :datetime
 #
 
-class OligoDesign < ActiveRecord::Base
-# PilotOligoDesign inherits from this model class, therefore any table name references must be generic, 
-# or method must be passed a parameter to indicate which model the method is accessing
-  #set_table_name  OLIGO_DESIGN_TABLE
-  set_table_name OLIGO_DESIGN_TABLE
+class OsseqDesign < ActiveRecord::Base
+  set_table_name = OSSEQ_DESIGN_TABLE
   
-  has_one  :oligo_annotation, :foreign_key => :oligo_design_id
   acts_as_commentable
   
   validates_uniqueness_of :oligo_name,
                           :on  => :create  
-                          
-  named_scope :qcpassed, :conditions => ['internal_QC IS NULL OR internal_QC = " " ']
-  named_scope :notflagged, :conditions => ['annotation_codes IS NULL OR annotation_codes < "A" ']
-  
-  #unique_enzymes = self.find(:all, :select => "DISTINCT(enzyme_code)",
-                                   :order  => :enzyme_code)
-#  ENZYMES = unique_enzymes.map{ |design| design.enzyme_code }
-#  ENZYMES_WO_GAPFILL = ENZYMES.reject { |enzyme| enzyme =~ /.*_gapfill/}
 
   #****************************************************************************************#
   #  Define virtual attributes                                                             #
@@ -56,13 +37,13 @@ class OligoDesign < ActiveRecord::Base
   end
   
 #  def usel_vector
-#    selector_useq[21,40]
+#    selector_useq[41,68]
 #  end
   
 #  def selector
-#    [sel_5prime, Vector::VECTOR, sel_3prime].join('')
+#    [sel_5prime, Vector::VECTOR].join('')
 #  end
-  
+
   #****************************************************************************************#
   #  Class find methods   - Oligos                                                         #
   #****************************************************************************************#

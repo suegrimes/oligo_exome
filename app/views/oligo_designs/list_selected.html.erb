@@ -1,12 +1,13 @@
-<% form_tag :action => "export_design" do %>
+<h1> Listing Selected Oligos</h1>
 
-<p>
+<% form_tag(:controller => 'downloads', :action => 'export_design', :method => :get) do %>
+
 <% if @oligo_designs.size > 0 %>
   <b>To export all details for these <%=h @oligo_designs.size %> oligos, please click here: <%= submit_tag "Export Oligos" -%></b> 
 <% else %>
   No oligos match the criteria given, please try your search again
 <% end %>
-</p>
+<br/><br/>
 
 <table class="list">
   <tr>
@@ -35,5 +36,6 @@
 	<%= hidden_field_tag("export_id[]", oligo_design.id)%>
   </tr>
 <% end %>
-<% end %>
 </table>
+
+<% end %>

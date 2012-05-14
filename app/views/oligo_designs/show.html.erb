@@ -1,1 +1,44 @@
-<%= render :partial => 'oligo_show', :locals => {:oligo_design => @oligo_design} %>												  
+<h1>Oligo Name: <span style="font-size: .8em; color: #000;"><%=h @oligo_design.oligo_name %></span></h1>
+
+<table class="list">
+  <tr>
+	<th>ID</th>
+	<th>Chromosome</th>    
+	<th>Capture Length</th>       
+	<th>Capture Start</th>      
+	<th>Capture End</th>      
+  </tr>
+  
+  <tr>
+	<td><%=h @oligo_design.id %></td>
+	<td><%=h @oligo_design.chromosome_nr %></td>
+	<td><%=h @oligo_design.amplicon_length %></td>
+	<td><%=h @oligo_design.amplicon_chr_start_pos %></td>
+	<td><%=h @oligo_design.amplicon_chr_end_pos %></td>
+  </tr>
+</table>
+
+<table class="list">  
+  <tr>
+	<th>Capture Oligo</th>
+	<th>Polarity</th>
+  </tr>
+  <tr>
+    <td><%=h @oligo_design.selector_useq %></td>
+	<td align=center><%=h @oligo_design.polarity %></td>
+  </tr>
+</table>
+
+<% if ANNOT_FLAG == 'Y' %>
+<%= render :partial => 'oligo_annotations', :locals => {:oligo_design => @oligo_design} %>
+<% end %>
+
+<table class="list" style="margin-bottom:0;border-bottom:none;">
+<tr><th style="border-bottom:none;">Genomic Capture Sequence</th></tr>
+</table>
+<div class="wraplongstring longstring_border"><%= @oligo_design.amplicon_seq %></div>
+
+<%= render(:partial => "shared/show_comments", :locals => {:comments => @comments}) %>
+<%= break_clear %>
+<%= render(:partial => "shared/add_comment", :locals => {:id => @oligo_design.id}) %>
+									  

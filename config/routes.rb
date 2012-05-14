@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   # Home page
-  map.root :controller => "oligo_designs", :action => "welcome" 
+  map.root :controller => "welcome", :action => "welcome" 
   
   # Signup/Login 
   map.signup  '/signup',           :controller => 'users',   :action => 'new' 
@@ -12,29 +12,35 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :session
   
-  # Help/FAQ - v8 Exome
-  map.faq_technology  '/v8faq/technology',  :controller => 'v8_help', :action => 'technology'
-  map.faq_annotations '/v8faq/annotations', :controller => 'v8_help', :action => 'annotations'
-  map.faq_statistics  '/v8faq/statistics',  :controller => 'v8_help', :action => 'statistics'
-  map.figure_s1       '/v8faq/figure_s1',  :controller => 'v8_help', :action => 'figure_s1'
-  map.table_s5        '/v8faq/table_s5',  :controller => 'v8_help', :action => 'table_s5'
-  map.table_s8        '/v8faq/table_s8',  :controller => 'v8_help', :action => 'table_s8'
+  # Help/FAQ - v8 Exome (Selector, Restriction Enzymes)
+  map.resources :faq_v8, :only => :none, :collection => {:technology => :get, 
+                                             :annotations => :get,
+                                             :statistics => :get,
+                                             :figure_s1 => :get,
+                                             :table_s5 => :get,
+                                             :table_s8 => :get}
   
-  # Help/FAQ - v12 Exome
-  
-  # Help/FAQ - v13 Exome
+  # Help/FAQ - v12 Exome (Selector, No restriction enzymes)
+  # This is just a copy of version 8 tables for now, need to update
+  map.resources :faq_v12, :only => :none, :collection => {:technology => :get, 
+                                             :annotations => :get,
+                                             :statistics => :get,
+                                             :figure_s1 => :get,
+                                             :table_s5 => :get,
+                                             :table_s8 => :get}
+                                             
+  # Help/FAQ - v13 Exome (OS-Seq)
   
   # Oligo Designs
-  map.resources :oligo_designs
-  map.designquery 'designquery',       :controller => 'oligo_designs', :action => 'select_params'
-  map.list_selected 'list_oligos',     :controller => 'oligo_designs', :action => 'list_selected'
-  map.export 'export',                 :controller => 'oligo_designs', :action => 'export'
+  map.resources :oligo_designs, :collection => {:select_params => :get,
+                                                :list_selected => :get}
   
-  # Zip download (entire exome of designs)
-  map.zip_download 'zip_download',     :controller => 'oligo_designs', :action => 'zip_download'
+  # Export and download  
+  map.export 'export',                 :controller => 'downloads', :action => 'export_design'
+  map.zip_download 'zip_download',     :controller => 'downloads', :action => 'zip_download'
   
   # Error/not implemented
-  map.notimplemented 'notimplemented', :controller => 'dummy',         :action => 'notimplemented'
+  map.notimplemented 'notimplemented', :controller => 'welcome',       :action => 'notimplemented'
   
   # The priority is based upon order of creation: first created -> highest priority.
 
