@@ -34,7 +34,7 @@ def self.export_conditions
   
   xfmt = (EXOME_VERSION > 12 ? 2 : 1)
   if EXOME_VERSION > 8
-    condition_array = ["model_nm <> 'oligo_annotation' AND export_type = ?", xfmt]
+    condition_array = ["re_versions_only IS NULL AND export_type = ?", xfmt]
   else
     condition_array = ["export_type = ?", xfmt]
   end

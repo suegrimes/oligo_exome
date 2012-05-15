@@ -22,7 +22,7 @@ class OsseqDesignsController < ApplicationController
   #*******************************************************************************************#
   def list_selected
     error_found = false
-    @rc = check_params(params)
+    @rc = check_gene_params(params)
 
     case @rc
       when /e\d/ # error code ('e' followed by digit)
@@ -30,7 +30,7 @@ class OsseqDesignsController < ApplicationController
       
     when 'g'  #gene list entered
       gene_list      = create_array_from_text_area(params[:genes])
-      @osseq_designs = OsseqDesign.find_selectors_with_conditions(['gene_code IN (?)', gene_list])
+      @osseq_designs = OsseqDesign.find_oligos_with_conditions(['gene_code IN (?)', gene_list])
       error_found    = check_if_blank(@osseq_designs, 'oligos', 'gene(s)')
     end
 
@@ -51,28 +51,5 @@ class OsseqDesignsController < ApplicationController
     end
 
     redirect_to :action => 'show', :id => params[:id]
-  end
-
-private
-  #*******************************************************************************************#
-  # Method for checking parameters from "select_params"                                       #    
-  #*******************************************************************************************#
-  def check_params(params, action='list')
-    # check first for #nr genes > 400 which can cause browser errors
-    nr_genes = params[:genes].split.size if params[:genes]
-    if nr_genes && nr_genes > 400
-        params[:genes] = ''  #reset params[:genes] to avoid browser errors
-        flash[:notice] = "Too many genes (#{nr_genes}) in list - please limit to 400 genes"
-        rc = 'e2'
-
-    elsif !params[:genes].blank?
-      rc = 'g'
-
-    else
-      # error - genes are blank
-      flash[:notice] = 'Please select one or more gene(s) for this query'
-      rc = 'e1'
-    end
-    return rc
-  end
+  end  
 end

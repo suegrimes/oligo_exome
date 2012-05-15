@@ -1,0 +1,41 @@
+<h1>Oligo Name: <span style="font-size: .8em; color: #000;"><%=h @osseq_design.oligo_name %></span></h1>
+
+<table class="list">
+  <tr>
+	<th>ID</th>
+	<th>Gene</th>
+	<th>Exon</th>
+	<th>Chromosome</th>    
+	<th>Target Start</th>       
+	<th>Capture Start</th>      
+	<th>Capture End</th>      
+  </tr>
+  
+  <tr>
+	<td><%=h @osseq_design.id %></td>
+	<td><%=h @osseq_design.gene_code %></td>
+	<td><%=h @osseq_design.exon_nr %></td>
+	<td style="text-align:center"><%=h @osseq_design.chromosome_nr %></td>
+	<td><%=h @osseq_design.target_chr_start_pos %></td>
+	<td><%=h @osseq_design.amplicon_chr_start_pos %></td>
+	<td><%=h @osseq_design.amplicon_chr_end_pos %></td>
+  </tr>
+</table>
+
+<table class="list">  
+  <tr>
+	<th>Capture Oligo</th>
+	<th>Polarity</th>
+	<th>Tile Score</th>
+  </tr>
+  <tr>
+    <td><%=h @osseq_design.capture_seq %></td>
+	<td align=center><%=h @osseq_design.polarity %></td>
+	<td><%=h @osseq_design.tile_score %></td>
+  </tr>
+</table>
+
+<%= render(:partial => "shared/show_comments", :locals => {:comments => @comments}) %>
+<%= break_clear %>
+<%= render(:partial => "shared/add_comment", :locals => {:id => @osseq_design.id}) %>
+									  

@@ -35,6 +35,28 @@ class DownloadsController < ApplicationController
         render :text => csv_string
     end
   end
+  
+  def export_osseq
+    add_one_to_counter('export')
+#
+    export_type = 'T1'
+    design_ids = params[:export_id]
+    @osseq_designs = OsseqDesign.find_with_id_list(design_ids)
+    file_basename  = "osseqdesigns_" + Date.today.to_s
+
+    case export_type
+      when 'T1'  # Export to tab-delimited text using csv_string
+        @filename = file_basename + ".txt"
+        csv_string = export_osseq_csv(@osseq_designs)
+        send_data(csv_string,
+          :type => 'text/csv; charset=utf-8; header=present',
+          :filename => @filename, :disposition => 'attachment')
+
+      else # Use for debugging
+        csv_string = export_osseq_csv(@osseq_designs)
+        render :text => csv_string
+    end
+  end
 
   #*******************************************************************************************#
   # Method for download of zip file of oligos for entire exonome                              #
@@ -56,7 +78,7 @@ private
         fld = 'zipdownload_cnt'
     end
 
-    ExportCount.increment_counter(fld.to_sym, 1) if fld
+    ExportCount.increment_counter(fld.to_sym, EXOME_VERSION) if fld
   end
 
   #*******************************************************************************************#
@@ -85,19 +107,42 @@ private
     end
     return csv_string
   end
+  
+  #*******************************************************************************************#
+  # Export osseq designs to csv file                                                          #
+  #*******************************************************************************************#
+  def export_osseq_csv(osseq_designs)
+    csv_string = FasterCSV.generate(:col_sep => "\t") do |csv|
+      csv << (ExportField.headings << 'Extract_Date')
+
+      osseq_designs.each do |osseq_design|
+        fld_array = []
+
+        ExportField.fld_names.each do |model, fld|
+          if model == 'osseq_design'
+            fld_array << osseq_design["#{fld}"] 
+          end
+        end
+
+        csv << (fld_array << Date.today.to_s)
+        end
+    end
+    return csv_string
+  end
 
   #*******************************************************************************************#
   # Download zip file                                                                         #
   #*******************************************************************************************#
   def download_zip_file(version_id=EXOME_VERSION)
-    filepath = File.join(ZIP_ABS_PATH, "oligo_exome_V#{version_id.to_s}.zip")
+    exome_zip = "oligo_exome_V#{version_id.to_s}.zip"
+    filepath = File.join(ZIP_ABS_PATH, exome_zip)
 
     if FileTest.file?(filepath)
       flash[:notice] = "Zip file successfully downloaded"
       send_file(filepath, :disposition => "attachment")
     else
       #flash[:notice] = "Error downloading zip file - file #{filepath} not found"
-      flash[:notice] = "Error downloading zip file - file not found"
+      flash[:notice] = "Error downloading zip file - #{exome_zip} not found"
     end
   end
 

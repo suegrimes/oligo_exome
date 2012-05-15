@@ -17,7 +17,7 @@ ZIP_REL_PATH = (CAPISTRANO_DEPLOY ? File.join("..", "..", "shared", "files") : "
 ZIP_ABS_PATH = File.join(RAILS_ROOT, ZIP_REL_PATH)
 
 # Exome version# should later be read from a file, vs hard-coded
-EXOME_VERSION = 12
+EXOME_VERSION = 13
 APP_LAYOUT = ['exome_v', EXOME_VERSION.to_s].join
 OLIGO_DESIGN_TABLE = ['oligo_designs_v', EXOME_VERSION.to_s].join
 OSSEQ_DESIGN_TABLE = ['osseq_designs_v', EXOME_VERSION.to_s].join

@@ -30,9 +30,19 @@ ActionController::Routing::Routes.draw do |map|
                                              :table_s8 => :get}
                                              
   # Help/FAQ - v13 Exome (OS-Seq)
-  
+  # This is just a copy of version 8 tables for now, need to update
+  map.resources :faq_v13, :only => :none, :collection => {:technology => :get, 
+                                             :statistics => :get,
+                                             :figure_s1 => :get,
+                                             :table_s5 => :get,
+                                             :table_s8 => :get}
+                                             
   # Oligo Designs
   map.resources :oligo_designs, :collection => {:select_params => :get,
+                                                :list_selected => :get}
+                                                
+  # OS-Seq Designs
+  map.resources :osseq_designs, :collection => {:select_params => :get,
                                                 :list_selected => :get}
   
   # Export and download  

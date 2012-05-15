@@ -1,0 +1,37 @@
+<h1> Listing Selected Oligos</h1>
+
+<% form_tag(:controller => 'downloads', :action => 'export_osseq', :method => :get) do %>
+
+<% if @osseq_designs.size > 0 %>
+  <b>To export all details for these <%=h @osseq_designs.size %> oligos, please click here: <%= submit_tag "Export Oligos" -%></b> 
+<% else %>
+  No oligos match the criteria given, please try your search again
+<% end %>
+<br/><br/>
+
+<table class="list">
+  <tr>
+	<th>Oligo Name</th>
+	<th>Gene</th>
+	<th>Exon</th>
+	<th>Chromosome</th>	
+	<th>Capture Start</th>
+	<th>Polarity</th>
+	<th>Tile Score</th>
+  </tr>
+	
+<% for osseq_design in @osseq_designs %>
+  <tr>
+	<td><%= link_to osseq_design.oligo_name, osseq_design %></td>
+	<td><%=h osseq_design.gene_code %></td>
+	<td><%=h osseq_design.exon_nr %></td>
+	<td><%=h osseq_design.chromosome_nr %></td>	
+	<td><%=h osseq_design.amplicon_chr_start_pos %></td>
+	<td align=center><%=h osseq_design.sel_polarity %></td>
+	<td><%=h osseq_design.tile_score %></td>
+	<%= hidden_field_tag("export_id[]", osseq_design.id)%>
+  </tr>
+<% end %>
+</table>
+
+<% end %>
