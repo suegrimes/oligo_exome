@@ -42,9 +42,8 @@ class OligoDesign < ActiveRecord::Base
   named_scope :qcpassed, :conditions => ['internal_QC IS NULL OR internal_QC = " " ']
   named_scope :notflagged, :conditions => ['annotation_codes IS NULL OR annotation_codes < "A" ']
   
-  #unique_enzymes = self.find(:all, :select => "DISTINCT(enzyme_code)",
-                                   :order  => :enzyme_code)
-#  ENZYMES = unique_enzymes.map{ |design| design.enzyme_code }
+# unique_enzymes = self.find(:all, :select => "DISTINCT(enzyme_code)")
+#  ENZYMES = unique_enzymes.map{ |design| design.enzyme_code }.sort
 #  ENZYMES_WO_GAPFILL = ENZYMES.reject { |enzyme| enzyme =~ /.*_gapfill/}
 
   #****************************************************************************************#
