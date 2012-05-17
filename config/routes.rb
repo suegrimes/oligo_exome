@@ -23,19 +23,14 @@ ActionController::Routing::Routes.draw do |map|
   # Help/FAQ - v12 Exome (Selector, No restriction enzymes)
   # This is just a copy of version 8 tables for now, need to update
   map.resources :faq_v12, :only => :none, :collection => {:technology => :get, 
-                                             :annotations => :get,
                                              :statistics => :get,
-                                             :figure_s1 => :get,
-                                             :table_s5 => :get,
-                                             :table_s8 => :get}
+                                             :figure_s1 => :get}
                                              
   # Help/FAQ - v13 Exome (OS-Seq)
   # This is just a copy of version 8 tables for now, need to update
   map.resources :faq_v13, :only => :none, :collection => {:technology => :get, 
                                              :statistics => :get,
-                                             :figure_s1 => :get,
-                                             :table_s5 => :get,
-                                             :table_s8 => :get}
+                                             :figure_s1 => :get}
                                              
   # Oligo Designs
   map.resources :oligo_designs, :collection => {:select_params => :get,

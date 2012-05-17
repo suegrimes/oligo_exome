@@ -11,19 +11,19 @@ class FaqV8Controller < ApplicationController
   end
  
   def table_s5
-    @table1 = read_table(File.join(FILE_PATH, "Table_S5_Novels_SNVs.txt"))
+    @table_s5 = read_table(File.join(FILE_PATH, "Table_S5_Novels_SNVs.txt"))
     #send_file(File.join(FILE_PATH, "Table_S5_Novels_SNVs.txt"), :type => 'text/csv', :disposition => 'inline')
   end
   
   def table_s8
-    #@table1 = read_table(File.join(FILE_PATH, "Table_S8_Capture_Oligos.txt"))
+    #@table_s8 = read_table(File.join(FILE_PATH, "Table_S8_Capture_Oligos.txt"))
     send_file(File.join(FILE_PATH, "Table_S8_Capture_Oligos.txt"), :type => 'text/csv', :disposition => 'inline')
   end
 
   def statistics
-    @table1 = read_table(File.join(FILE_PATH, "oligostats_table2.txt"))
-    @table2 = read_table(File.join(FILE_PATH, "oligostats_table3.txt"))
-    @table3 = read_table(File.join(FILE_PATH, "oligostats_table4a.txt"))
+    @stats_table1 = read_table(File.join(FILE_PATH, "oligostats_table2.txt"))
+    @stats_table2 = read_table(File.join(FILE_PATH, "oligostats_table3.txt"))
+    @stats_table3 = read_table(File.join(FILE_PATH, "oligostats_table4a.txt"))
   end
   
   def annotations 

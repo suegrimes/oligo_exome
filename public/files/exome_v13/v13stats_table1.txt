@@ -1,0 +1,9 @@
+Parameter	Human OligoExome
+Total number of genes from CCDS	"xx,xxx"
+Total number of exon sequences	"xxx,xxx"
+Average exons per gene	xx.xx
+Total exonic bases derived from CCDS (Mb)	xx.x
+Total number of designed capture oligonucleotides	"794,287"
+Percent of captured exon bases by design	xx.xx%
+Average number of capture oligonucleotides per gene	xx
+Average number of capture oligonucleotides per exon	x

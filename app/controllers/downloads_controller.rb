@@ -2,7 +2,7 @@ class DownloadsController < ApplicationController
   def export_design
     add_one_to_counter('export')
 #
-    export_type = 'D'
+    export_type = 'T1'
     design_ids = params[:export_id]
     @oligo_designs = OligoDesign.find_with_id_list(design_ids)
     file_basename  = "oligodesigns_" + Date.today.to_s

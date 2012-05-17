@@ -11,9 +11,7 @@ class FaqV13Controller < ApplicationController
   end
 
   def statistics
-    @table1 = read_table(File.join(FILE_PATH, "oligostats_table2.txt"))
-    @table2 = read_table(File.join(FILE_PATH, "oligostats_table3.txt"))
-    @table3 = read_table(File.join(FILE_PATH, "oligostats_table4a.txt"))
+    @table1 = read_table(File.join(FILE_PATH, "v13stats_table1.txt"))
   end
   
 end
