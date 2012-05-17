@@ -12,5 +12,5 @@
 
 class Vector < ActiveRecord::Base
 #VECTOR = 'ACGATAACGGTACAAGGCTAAAGCTTTGCTAACGGTCGAG'
-  VECTOR = self.find(VERSION::DESIGN_VERSION.vector_id).vector
+  VECTOR = self.find(Version::DESIGN_VERSION.vector_id).vector
 end
