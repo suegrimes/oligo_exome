@@ -27,7 +27,7 @@ ZIP_ABS_PATH = File.join(RAILS_ROOT, ZIP_REL_PATH)
 # Read exome_version file to determine which set of exome designs to access
 # Exome version row will be in format: EXOME=V? (where ? is version number)
 exome_row = read_file("#{RAILS_ROOT}/public/system/exome_version.txt")
-EXOME_VERSION = (exome_row ? exome_row[0][7..-1].to_i : '12')  # Default to version 12 if exome version not readable
+EXOME_VERSION = (exome_row ? exome_row[0][7..-1].to_i : 12)  # Default to version 12 if exome version not readable
 
 APP_LAYOUT = ['exome_v', EXOME_VERSION.to_s].join
 OLIGO_DESIGN_TABLE = ['oligo_designs_v', EXOME_VERSION.to_s].join
