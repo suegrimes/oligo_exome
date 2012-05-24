@@ -12,13 +12,17 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :session
   
-  # Help/FAQ
-  map.faq_technology  '/faq_technology',  :controller => 'help', :action => 'technology'
-  map.faq_annotations '/faq_annotations', :controller => 'help', :action => 'annotations'
-  map.faq_statistics  '/faq_statistics',  :controller => 'help', :action => 'statistics'
-  map.figure_s1       '/figure_s1',  :controller => 'help', :action => 'figure_s1'
-  map.table_s5        '/table_s5',  :controller => 'help', :action => 'table_s5'
-  map.table_s8        '/table_s8',  :controller => 'help', :action => 'table_s8'
+  # Help/FAQ - v8 Exome
+  map.faq_technology  '/v8faq/technology',  :controller => 'v8_help', :action => 'technology'
+  map.faq_annotations '/v8faq/annotations', :controller => 'v8_help', :action => 'annotations'
+  map.faq_statistics  '/v8faq/statistics',  :controller => 'v8_help', :action => 'statistics'
+  map.figure_s1       '/v8faq/figure_s1',  :controller => 'v8_help', :action => 'figure_s1'
+  map.table_s5        '/v8faq/table_s5',  :controller => 'v8_help', :action => 'table_s5'
+  map.table_s8        '/v8faq/table_s8',  :controller => 'v8_help', :action => 'table_s8'
+  
+  # Help/FAQ - v12 Exome
+  
+  # Help/FAQ - v13 Exome
   
   # Oligo Designs
   map.resources :oligo_designs
@@ -28,11 +32,6 @@ ActionController::Routing::Routes.draw do |map|
   
   # Zip download (entire exome of designs)
   map.zip_download 'zip_download',     :controller => 'oligo_designs', :action => 'zip_download'
-  
-  # Genome build & Design results
-  map.resources :genes
-  map.resources :target_regions
-  map.resources :selector_sites
   
   # Error/not implemented
   map.notimplemented 'notimplemented', :controller => 'dummy',         :action => 'notimplemented'

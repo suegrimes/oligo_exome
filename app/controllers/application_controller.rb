@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   include OligoExtensions
 
   before_filter :login_required
+  layout "#{EXOME_LAYOUT}"
   
   require 'fastercsv'
   

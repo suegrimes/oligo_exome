@@ -1,4 +1,4 @@
-class HelpController < ApplicationController
+class V8HelpController < ApplicationController
   skip_before_filter :login_required
   FILE_PATH = File.join(RAILS_ROOT, "public/files")
   

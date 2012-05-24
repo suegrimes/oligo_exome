@@ -8,10 +8,8 @@
 <% end %>
 </p>
 
-<%= hidden_field_tag("version_id", @version_id)%>
 <table class="list">
   <tr>
-	<% if @version_id < 3 %><th>ID</th><% end %>
 	<th>Oligo Name</th>
 	<th>Chromosome</th>
 	<th>Capture Start</th>
@@ -25,7 +23,6 @@
 	
 <% for oligo_design in @oligo_designs %>
   <tr>
-	<% if @version_id < 3 %><td><%=h oligo_design.id %></td><%end%>
 	<td><%= link_to oligo_design.oligo_name, oligo_design %></td>
 	<td><%=h oligo_design.chromosome_nr %></td>
 	<td><%=h oligo_design.amplicon_chr_start_pos %></td>
