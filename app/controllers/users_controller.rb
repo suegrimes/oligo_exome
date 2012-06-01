@@ -53,5 +53,9 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+  def edit
+      render :text => 'Need Edit screen'
+  end
 
 end

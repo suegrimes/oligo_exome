@@ -38,9 +38,9 @@ class OligoDesign < ActiveRecord::Base
   validates_uniqueness_of :oligo_name,
                           :on  => :create  
                           
-  named_scope :curr_ver, :conditions => ['version_id = (?)', Version::DESIGN_VERSION.id ]
-  named_scope :qcpassed, :conditions => ['internal_QC IS NULL OR internal_QC = " " ']
-  named_scope :notflagged, :conditions => ['annotation_codes IS NULL OR annotation_codes < "A" ']
+  scope :curr_ver, :conditions => ['version_id = (?)', Version::DESIGN_VERSION.id ]
+  scope :qcpassed, :conditions => ['internal_QC IS NULL OR internal_QC = " " ']
+  scope :notflagged, :conditions => ['annotation_codes IS NULL OR annotation_codes < "A" ']
   
   unique_enzymes = self.curr_ver.find(:all, 
                                       :select => "DISTINCT(enzyme_code)",

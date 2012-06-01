@@ -1,7 +1,6 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
+  protect_from_forgery
+  
   include AuthenticatedSystem
   # You can move this into a different controller, if you wish.  This module gives you the require_role helpers, and others.
   include RoleRequirementSystem
@@ -10,7 +9,8 @@ class ApplicationController < ActionController::Base
   before_filter :login_required
   layout "#{EXOME_LAYOUT}"
   
-  require 'fastercsv'
+  #require 'fastercsv'
+  require 'csv'
   
   helper :all # include all helpers, all the time
   
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
-  filter_parameter_logging :password
+  #filter_parameter_logging :password
   
   def store_comment(model_instance, params)
     comment = Comment.create(:user_id => current_user.id, 
@@ -61,6 +61,4 @@ class ApplicationController < ActionController::Base
     
     return error_found
   end
-  
-
 end
