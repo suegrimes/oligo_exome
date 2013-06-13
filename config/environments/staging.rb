@@ -1,3 +1,4 @@
+OligoExome::Application.configure do
 # Settings specified here will take precedence over those in config/environment.rb
 
 # In the development environment your application's code is reloaded on
@@ -47,3 +48,5 @@ config.action_mailer.smtp_settings = {
 #             :user_name => 'stanford.oligoexome',
 #             :password  => <pswd>
              }
+
+end
