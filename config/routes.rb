@@ -1,5 +1,4 @@
 OligoExome::Application.routes.draw do
-  
   # Home page
   root :to => 'oligo_designs#welcome' 
   
@@ -31,6 +30,7 @@ OligoExome::Application.routes.draw do
   match 'designquery' => 'oligo_designs#select_params'
   match 'list_oligos' => 'oligo_designs#list_selected'
   match 'export'      => 'oligo_designs#export'
+  match 'export_design' => 'oligo_designs#export_design'
   
   # Zip download (entire exome of designs)
   match 'zip_download' => 'oligo_designs#zip_download'
