@@ -32,6 +32,6 @@ class V8HelpController < ApplicationController
 
 protected
   def read_table(file_path)
-    FasterCSV.read(file_path, {:col_sep => "\t"})
+    CSV.read(file_path, {:col_sep => "\t"})
   end
 end
