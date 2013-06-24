@@ -18,6 +18,5 @@
 /public/javascripts/all.js
 /app/assets/javascripts/all.js
 /config/database.yml
-/script/*
 /test/*
 /.project
