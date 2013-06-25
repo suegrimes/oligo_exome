@@ -31,6 +31,7 @@ OligoExome::Application.routes.draw do
   match 'list_oligos' => 'oligo_designs#list_selected'
   match 'export'      => 'oligo_designs#export'
   match 'export_design' => 'oligo_designs#export_design'
+  match 'add_comment/:id' => 'oligo_designs#add_comment', :via => 'post', :as => 'add_comment'
   
   # Zip download (entire exome of designs)
   match 'zip_download' => 'oligo_designs#zip_download'
