@@ -15,6 +15,7 @@
 /tmp
 /public/system/*
 /public/oligo_exome*.zip
+/shared/files/oligo_exome*.zip
 /public/javascripts/all.js
 /app/assets/javascripts/all.js
 /config/database.yml
