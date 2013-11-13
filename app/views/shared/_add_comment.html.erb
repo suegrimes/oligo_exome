@@ -2,7 +2,7 @@
   <strong><%= link_to "Add Comment", '', :onclick => "showHideDiv('comment_see','commenting'); return false;" %></strong>
 </div
 
-<%= form_tag add_comment_path(:id => id) do %>
+<%= form_tag add_comment_path, :id => id do %>
 
 <fieldset id="commenting" style="visibility:hidden" class="form">
 <legend>Add a Comment</legend>
