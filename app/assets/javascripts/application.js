@@ -12,8 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
-
 
 function showHideDiv(elementId1, elementId2) {
   if (document.getElementById) {
