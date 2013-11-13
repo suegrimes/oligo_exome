@@ -96,9 +96,10 @@ class OligoDesign < ActiveRecord::Base
   end
   
   def self.find_selectors_with_conditions(condition_array)
-    self.curr_ver.qcpassed.find(:all,
-                                :order => 'gene_code, enzyme_code',                               
-                                :conditions => condition_array) 
+    #self.curr_ver.qcpassed.find(:all,
+    #                            :order => 'gene_code, enzyme_code',                               
+    #                            :conditions => condition_array) 
+    self.curr_ver.qcpassed.order('gene_code, enzyme_code').where(condition_array).all                              
   end
   
   def self.find_with_id_list(id_list)
