@@ -14,25 +14,35 @@ OligoExome::Application.routes.draw do
   resource  :session
 
   # Help/FAQ - v8 Exome
-  match '/v8faq/technology'  => 'v8_help#technology'
-  match '/v8faq/annotations' => 'v8_help#annotations'
-  match '/v8faq/statistics'  => 'v8_help#statistics'
-  match '/v8faq/figure_s1'   => 'v8_help#figure_s1'
-  match '/v8faq/table_s5'    => 'v8_help#table_s5'
-  match '/v8faq/table_s8'    => 'v8_help#table_s8'
-  
+  resource :v8faq, :controller => :v8_help, :only => :show do
+    collection do
+      get :technology
+      get :annotations
+      get :statistics
+      get :figure_s1
+      get :table_s5
+      get :table_s8
+    end
+  end
+
   # Help/FAQ - v12 Exome
   
   # Help/FAQ - v13 Exome
   
   # Oligo Designs
-  resources :oligo_designs
-  match 'designquery' => 'oligo_designs#select_params'
-  match 'list_oligos' => 'oligo_designs#list_selected'
-  match 'export'      => 'oligo_designs#export'
-  match 'export_design' => 'oligo_designs#export_design'
-  match 'add_comment/:id' => 'oligo_designs#add_comment', :via => 'post', :as => 'add_comment'
-  
+  resources :oligo_designs, :only => :show do
+    collection do
+      get :select_params
+      post :list_selected
+      get :export
+      get :export_design
+    end
+    post :add_comment, on: :member
+  end
+  resources :comments do
+    post :update, on: :member
+  end
+
   # Zip download (entire exome of designs)
   match 'zip_download' => 'oligo_designs#zip_download'
   

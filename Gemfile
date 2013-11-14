@@ -44,4 +44,4 @@ gem 'rake', ">= 0.9.2.2"
 
 gem 'mysql2'
 
-gem 'acts_as_commentable', ">=3"
+gem 'acts_as_commentable', "3.0.1"
