@@ -16,7 +16,8 @@ class UsersController < ApplicationController
     @user.save
     if @user.errors.empty?
       # DEFAULT_ROLE set in role.rb
-      @user.roles = Role.find_all_by_name(Role::DEFAULT_ROLE) if Role::DEFAULT_ROLE
+      #@user.roles = Role.find_all_by_name(Role::DEFAULT_ROLE) if Role::DEFAULT_ROLE
+      @user.roles = Role.where(name: Role::DEFAULT_ROLE).all if Role::DEFAULT_ROLE
       self.current_user = @user
       redirect_to root_url
       flash.now[:notice] = "Thanks for signing up!"
@@ -27,7 +28,8 @@ class UsersController < ApplicationController
   
   def forgot
     if request.post?
-      user = User.find_by_email(params[:user][:email])
+      #user = User.find_by_email(params[:user][:email])
+      user = User.where(email: params[:user][:email])
       if user
         user.create_reset_code
         flash.now[:notice] = "Reset code sent to #{user.email}"
@@ -41,7 +43,8 @@ class UsersController < ApplicationController
   end
   
   def reset
-    @user = User.find_by_reset_code(params[:reset_code]) unless params[:reset_code].nil?
+    #@user = User.find_by_reset_code(params[:reset_code]) unless params[:reset_code].nil?
+    @user = User.where(reset_code: params[:reset_code]) unless params[:reset_code].nil?
     if request.post?
       if @user.update_attributes(:password => params[:user][:password], :password_confirmation => params[:user][:password_confirmation])
         self.current_user = @user
