@@ -17,7 +17,6 @@ class CommentsController < ApplicationController
       redirect_to :back 
     end
   end
-
   
   def destroy
     @comment = Comment.find(params[:id])
@@ -28,3 +27,5 @@ class CommentsController < ApplicationController
     flash[:notice] = 'Comment deleted'
     redirect_to :controller => c_name, :action => :show, :id => oligo_id
   end
+
+end
