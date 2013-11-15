@@ -97,15 +97,13 @@ class OligoDesignsController < ApplicationController
   # Method for adding comment associated with a specific oligo                                #
   #*******************************************************************************************#
   def add_comment
-    render text: params[:comment]
-    #unless params[:comment].nil? || params[:comment]== ''
-    #  @oligo_design = OligoDesign.find(params[:id])
-    #  store_comment(@oligo_design, params)
-   # end
+    unless params[:comment].nil? || params[:comment]== ''
+      @oligo_design = OligoDesign.find(params[:id])
+      store_comment(@oligo_design, params)
+    end
 
-    #redirect_to :action => 'show', :id => params[:id]
+    redirect_to :action => 'show', :id => params[:id]
   end
-
 
   private
 
