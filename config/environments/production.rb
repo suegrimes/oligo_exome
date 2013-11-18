@@ -68,16 +68,4 @@ OligoExome::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
-  # old code
-
-  # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-             :enable_starttls_auto => true,
-             :address => 'smtp.stanford.edu',
-             :port    => 25,
-             :domain  => 'stanford.edu',
-             :tls     => true
-             }
 end

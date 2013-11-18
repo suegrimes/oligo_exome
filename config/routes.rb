@@ -24,7 +24,7 @@ OligoExome::Application.routes.draw do
       get :table_s8
     end
   end
-  
+
   # Help/FAQ - v12 Exome
   
   # Help/FAQ - v13 Exome
@@ -44,7 +44,7 @@ OligoExome::Application.routes.draw do
   resources :comments do
     post :update, on: :member
   end
-  
+
   # Zip download (entire exome of designs)
   match 'zip_download' => 'oligo_designs#zip_download'
   
