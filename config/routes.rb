@@ -35,10 +35,12 @@ OligoExome::Application.routes.draw do
       get :select_params
       post :list_selected
       get :export
-      get :export_design
+ #    get :export_design
     end
     post :add_comment, on: :member
   end
+  match '/export_design' => 'oligo_designs#export_design'
+
   resources :comments do
     post :update, on: :member
   end

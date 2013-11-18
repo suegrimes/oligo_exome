@@ -45,12 +45,12 @@ class OligoDesignsController < ApplicationController
   #
   # GET /oligo_designs
   def index
-    @oligo_designs = OligoDesign.curr_ver.find(:all)
+    @oligo_designs = OligoDesign.curr_ver.all
   end
   #
   # GET /oligo_designs/1
   def show
-    @oligo_design = OligoDesign.find(params[:id], :include => :oligo_annotation )
+    @oligo_design = OligoDesign.includes(:oligo_annotation).find(params[:id])
     @comments     = @oligo_design.comments.sort_by(&:created_at).reverse
   end
 
@@ -104,7 +104,6 @@ class OligoDesignsController < ApplicationController
 
     redirect_to :action => 'show', :id => params[:id]
   end
-
 
   private
 
