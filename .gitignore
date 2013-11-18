@@ -24,3 +24,6 @@
 /config/database.yml
 /test/*
 /.project
+
+# Ignore Gemfile.lock for OS incompatibilities
+/Gemfile.lock
