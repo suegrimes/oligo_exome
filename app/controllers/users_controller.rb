@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   def forgot
     if request.post?
       #user = User.find_by_email(params[:user][:email])
-      user = User.where(email: params[:user][:email])
+      user = User.where(email: params[:user][:email]).first
       if user
         user.create_reset_code
         flash.now[:notice] = "Reset code sent to #{user.email}"
