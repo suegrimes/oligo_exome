@@ -51,7 +51,8 @@ class ApplicationController < ActionController::Base
     text.scan(/.{1,#{max_width}}/).join("<br>")
   end
   
-   def check_if_blank(model_object, model_text, param_type)
+  # General method to check whether model_object is blank/empty/nil
+  def check_if_blank(model_object, model_text, param_type)
     if model_object.nil? || model_object.empty?
       error_found = true
       flash[:notice] = "No #{model_text} found for #{param_type} entered - please try again"
