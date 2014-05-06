@@ -45,12 +45,12 @@ class OligoDesignsController < ApplicationController
   #
   # GET /oligo_designs
   def index
-    @oligo_designs = OligoDesign.curr_ver.find(:all)
+    @oligo_designs = OligoDesign.curr_ver.all
   end
   #
   # GET /oligo_designs/1
   def show
-    @oligo_design = OligoDesign.find(params[:id], :include => :oligo_annotation )
+    @oligo_design = OligoDesign.includes(:oligo_annotation).find(params[:id])
     @comments     = @oligo_design.comments.sort_by(&:created_at).reverse
   end
 
@@ -81,7 +81,7 @@ class OligoDesignsController < ApplicationController
     if error_found
       redirect_to :action => 'select_params', :genes => params[:genes]
     else
-      render :action => 'list_selected'
+      render 'list_selected'
     end
   end
 
@@ -104,7 +104,6 @@ class OligoDesignsController < ApplicationController
 
     redirect_to :action => 'show', :id => params[:id]
   end
-
 
   private
 
@@ -143,13 +142,12 @@ class OligoDesignsController < ApplicationController
 
     ExportCount.increment_counter(fld.to_sym, 1) if fld
   end
-
   #*******************************************************************************************#
   # Export oligo designs to csv file                                                          #
   #*******************************************************************************************#
   def export_designs_csv(oligo_designs)
     xfmt = ExportField::EXPORT_FMT
-    csv_string = FasterCSV.generate(:col_sep => "\t") do |csv|
+    csv_string = CSV.generate(:col_sep => "\t") do |csv|
       csv << (ExportField.headings(xfmt) << 'Extract_Date')
 
       oligo_designs.each do |oligo_design|
@@ -167,10 +165,10 @@ class OligoDesignsController < ApplicationController
         end
 
         csv << (fld_array << Date.today.to_s)
-        end
-    end
+      end # /oligo_design.each
+    end # /csv_string =
     return csv_string
-  end
+  end # /export_designs_csv
 
   #*******************************************************************************************#
   # Download zip file                                                                         #

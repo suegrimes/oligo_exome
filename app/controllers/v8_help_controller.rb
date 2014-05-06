@@ -1,6 +1,6 @@
 class V8HelpController < ApplicationController
   skip_before_filter :login_required
-  FILE_PATH = File.join(RAILS_ROOT, "public/files")
+  FILE_PATH = "#{Rails.root}/app/assets/files"
   
   def technology
   end
@@ -20,7 +20,8 @@ class V8HelpController < ApplicationController
     send_file(File.join(FILE_PATH, "Table_S8_Capture_Oligos.txt"), :type => 'text/csv', :disposition => 'inline')
   end
 
-  def statistics
+  def statistics 
+    #render :text => FILE_PATH
     @table1 = read_table(File.join(FILE_PATH, "oligostats_table2.txt"))
     @table2 = read_table(File.join(FILE_PATH, "oligostats_table3.txt"))
     @table3 = read_table(File.join(FILE_PATH, "oligostats_table4a.txt"))
@@ -31,6 +32,6 @@ class V8HelpController < ApplicationController
 
 protected
   def read_table(file_path)
-    FasterCSV.read(file_path, {:col_sep => "\t"})
+    CSV.read(file_path, {:col_sep => "\t"})
   end
 end

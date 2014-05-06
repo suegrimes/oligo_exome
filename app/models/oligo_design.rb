@@ -38,13 +38,14 @@ class OligoDesign < ActiveRecord::Base
   validates_uniqueness_of :oligo_name,
                           :on  => :create  
                           
-  named_scope :curr_ver, :conditions => ['version_id = (?)', Version::DESIGN_VERSION.id ]
-  named_scope :qcpassed, :conditions => ['internal_QC IS NULL OR internal_QC = " " ']
-  named_scope :notflagged, :conditions => ['annotation_codes IS NULL OR annotation_codes < "A" ']
+  scope :curr_ver, :conditions => ['version_id = (?)', Version::DESIGN_VERSION.id ]
+  scope :qcpassed, :conditions => ['internal_QC IS NULL OR internal_QC = " " ']
+  scope :notflagged, :conditions => ['annotation_codes IS NULL OR annotation_codes < "A" ']
   
-  unique_enzymes = self.curr_ver.find(:all, 
-                                      :select => "DISTINCT(enzyme_code)",
-                                      :order  => :enzyme_code)
+  #unique_enzymes = self.curr_ver.find(:all, 
+  #                                    :select => "DISTINCT(enzyme_code)",
+  #                                    :order  => :enzyme_code)
+  unique_enzymes = self.curr_ver.select("DISTINCT(enzyme_code)").order(:enzyme_code).all                                     
   ENZYMES = unique_enzymes.map{ |design| design.enzyme_code }
   ENZYMES_WO_GAPFILL = ENZYMES.reject { |enzyme| enzyme =~ /.*_gapfill/}
   #VECTOR = 'ACGATAACGGTACAAGGCTAAAGCTTTGCTAACGGTCGAG'
@@ -84,7 +85,7 @@ class OligoDesign < ActiveRecord::Base
     if curr_oligo_format?(oligo_name)                            
       # oligo name in current format, => use id as index
       oligo_array  = oligo_name.split(/_/)
-      oligo_design = self.find_by_oligo_name_and_id(oligo_name, oligo_array[0])
+      oligo_design = self.find_by_oligo_name_and_id(oligo_name, oligo_array[0]) #this syntax of find shoudn't be deprecated
     else
       # oligo name in old format => cannot use id, use gene code instead
       #gene_code    = self.get_gene_from_name(oligo_name, false)
@@ -96,15 +97,17 @@ class OligoDesign < ActiveRecord::Base
   end
   
   def self.find_selectors_with_conditions(condition_array)
-    self.curr_ver.qcpassed.find(:all,
-                                :order => 'gene_code, enzyme_code',                               
-                                :conditions => condition_array) 
+    #self.curr_ver.qcpassed.find(:all,
+    #                            :order => 'gene_code, enzyme_code',                               
+    #                            :conditions => condition_array) 
+    self.curr_ver.qcpassed.order('gene_code, enzyme_code').where(condition_array).all                              
   end
   
   def self.find_with_id_list(id_list)
-    self.find(:all, :include => :oligo_annotation,
-                    :order => 'gene_code, enzyme_code',
-                    :conditions => ["id IN (?)", id_list])
+    #self.find(:all, :include => :oligo_annotation,
+    #                :order => 'gene_code, enzyme_code',
+    #                :conditions => ["id IN (?)", id_list])
+    self.order('gene_code, enzyme_code').where(["id IN (?)", id_list]).all
   end
   
 end
