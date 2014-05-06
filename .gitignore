@@ -21,7 +21,14 @@
 /shared/files/oligo_exome*.zip
 /public/javascripts/all.js
 /app/assets/javascripts/all.js
+
 /config/database.yml
+# Ignore config/initializers 
+/config/initializers/secret_token.rb
+/config/initializers/session_store.rb
+/config/initializers/setup_mailer.rb
+/config/deploy.rb
+
 /test/*
 /.project
 
